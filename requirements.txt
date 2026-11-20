@@ -1,0 +1,10 @@
+datasets
+pyyaml
+numpy
+pandas
+regex
+eth-utils
+tqdm
+scikit-learn
+sentence-transformers
+requests

@@ -1,0 +1,13 @@
+{
+  "seed": 1729,
+  "targets": {"train": 15000, "val": 1500, "test_id": 1500, "test_heldout": 1000},
+  "injected_fraction": 0.35,
+  "oversample_injected": 1.0,
+  "oversample_clean": 2.0,
+  "clean_pool_weights": {"general": 0.31, "crypto": 0.23, "hard_negative": 0.46},
+  "general_paragraph_limit": 4000,
+  "carriers": ["visible_body", "html_hidden", "html_comment", "img_alt", "pdf_footer_header", "markdown_table_cell", "json_tool_response", "email_quote"],
+  "heldout_styles": ["obfuscated", "role_play"],
+  "heldout_carriers": ["json_tool_response", "email_quote"],
+  "heldout_goals": ["escalate_permission"]
+}

@@ -1,0 +1,8 @@
+malicious
+attacker
+evil
+hacker
+stealth_transfer
+0xdeadbeef
+malicious_wallet
+
