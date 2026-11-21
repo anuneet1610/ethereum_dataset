@@ -4,6 +4,7 @@ numpy
 pandas
 regex
 eth-utils
+eth-hash[pycryptodome]
 tqdm
 scikit-learn
 sentence-transformers

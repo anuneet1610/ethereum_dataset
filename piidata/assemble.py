@@ -1,29 +1,49 @@
 """Document insertion, extraction flattening, and segment labeling."""
 import random
-from .carriers import render, flatten
+from .carriers import render_document
 from .segmenter import split_segments
 
-def assemble(base, injected, carrier, rng, injected_indices=None):
-    base_parts=split_segments(base)
-    pos=rng.choices(['head','middle','tail'],[.25,.5,.25])[0]
-    at=0 if pos=='head' else (len(base_parts)//2 if pos=='middle' else len(base_parts))
-    before=' '.join(x.text for x in base_parts[:at]); after=' '.join(x.text for x in base_parts[at:])
-    rendered=render(injected,carrier); extracted=flatten(rendered,carrier)
-    doc=' '.join(x for x in [before,extracted,after] if x)
-    start=doc.find(extracted)
+def format_document(text, layout):
+    """Apply extractor-visible formatting parity to clean and injected docs."""
+    wrappers=[lambda s:'\n'+s,
+      lambda s:'### Payment record\n'+s,
+      lambda s:'From: billing@merchant.net\nSubject: Payment details\n'+s,
+      lambda s:'<section class="receipt">\n'+s+'\n</section>',
+      lambda s:'```text\n'+s+'\n```',
+      lambda s:'### Terms and payment\nFrom: accounts@merchant.net\n'+s+'\n```text\nstatus: filed\n```']
+    return wrappers[layout%len(wrappers)](text)
+
+def format_clean_document(text, rng):
+    return format_document(text,rng.randrange(6))
+
+def assemble(base, injected, carrier, rng, injected_indices=None, position=None):
+    pos=position or rng.choices(['head','middle','tail'],[.25,.5,.25])[0]
+    _,doc,start,end=render_document(base,injected,carrier,pos)
     marked=set(injected_indices or [])
-    segs=split_segments(doc); labels=[]
-    if marked:
-        injsegs=split_segments(extracted)
-        ranges=[]; p=start
-        for s in injsegs: ranges.append((p+s.start,p+s.end))
-        for i,s in enumerate(segs): labels.append(int(any(i2 in marked and min(s.end,b)-max(s.start,a)>0 for i2,(a,b) in enumerate(ranges))))
-    else:
-        end=start+len(extracted)
-        for s in segs:
-            overlap=max(0,min(s.end,end)-max(s.start,start))
-            labels.append(int(s.end>s.start and overlap/(s.end-s.start)>=.30))
-    return doc,segs,labels,pos,(start,start+len(extracted))
+    if not injected:
+        segs=split_segments(doc)
+        return doc,segs,[0]*len(segs),pos,(start,end)
+    # Segment the three regions independently so a neighboring base sentence
+    # can never be absorbed into an injection (or vice versa).
+    regions=((0,start,False),(start,end,True),(end,len(doc),False))
+    segs=[]; labels=[]; local_index=0
+    for left,right,is_injection in regions:
+        for part in split_segments(doc[left:right]):
+            from .segmenter import Segment
+            segs.append(Segment(part.start+left,part.end+left,part.text))
+            labels.append(int(is_injection and (not marked or local_index in marked)))
+            if is_injection: local_index+=1
+    return doc,segs,labels,pos,(start,end)
+
+
+def assemble_pair(base, injected, clean_control, carrier, rng, injected_indices=None):
+    """Clean is the unchanged base; injection is inserted into that same base."""
+    injected_doc, injected_segs, injected_labels, pos, span = assemble(
+        base,injected,carrier,rng,injected_indices)
+    _,clean_doc,_,_=render_document(base,'',carrier,pos)
+    clean_segs=split_segments(clean_doc); clean_labels=[0]*len(clean_segs)
+    return ((clean_doc,clean_segs,clean_labels,pos,(0,0)),
+            (injected_doc,injected_segs,injected_labels,pos,span))
 
 def contexts(segs,max_chars=1700):
     out=[]

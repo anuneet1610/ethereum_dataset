@@ -1,5 +1,6 @@
 """CrAI-SafeFuncCall OOD import, trailing-payload heuristic, and audit helpers."""
 import re
+import hashlib
 from collections.abc import Mapping
 
 from .segmenter import split_segments
@@ -80,6 +81,7 @@ def normalize_dataset(dataset):
         for i,row in enumerate(rows):
             source_id=row.get(id_col) if id_col else None
             normalized.append({'row_id':str(source_id if source_id is not None else f'{split_name}-{i}'),
+               'source_id':str(source_id if source_id is not None else f'{split_name}-{i}'),
                'attack':row.get(attack_col),'memory':str(row.get(mem_col) or ''),
                'source_split':str(split_name),'source_row':row})
     if not normalized:
@@ -128,13 +130,20 @@ def build_crai_split(rows):
                 payload.append(text); payload_indices.append(i)
                 if seg: spans.append([seg.start,seg.end])
             seg_by_index.append(f'{i}: {"injected" if label else "clean"} | {text}')
-            output.append({'id':f"crai-{row['row_id']}-{i}",'doc_id':f"crai-{row['row_id']}",'split':'test_ood_crai',
+            source_id=str(row.get('source_id') or row['row_id'])
+            split='dev_ood_crai' if int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%5==0 else 'test_ood_crai'
+            tag='crai_relevant' if is_attack else 'crai_other'
+            output.append({'id':f"crai-{row['row_id']}-{i}",'doc_id':f"crai-{row['row_id']}",'split':split,
               'text':text,'context':ctx[i] if i<len(ctx) else text,'label':int(label),'source':'crai',
+              'source_id':source_id,'crai_tag':tag,
               'template_id':f"crai-{row['row_id']}",'seed_id':None,'goal':None,'style':None,'carrier':None,'position':None,
               'hard_case':None,'paraphrased':False,'seg_index':i,'n_segments':len(pairs)})
         doc_id=f"crai-{row['row_id']}"
-        documents.append({'doc_id':doc_id,'split':'test_ood_crai','text':rewritten,'injection_spans':spans,
-          'original_text':original,'template_id':f"crai-{row['row_id']}",'source_split':row.get('source_split')})
+        source_id=str(row.get('source_id') or row['row_id'])
+        split='dev_ood_crai' if int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%5==0 else 'test_ood_crai'
+        documents.append({'doc_id':doc_id,'split':split,'text':rewritten,'injection_spans':spans,
+          'original_text':original,'template_id':f"crai-{row['row_id']}",'source_split':row.get('source_split'),'source_id':source_id,
+          'crai_tag':'crai_relevant' if is_attack else 'crai_other'})
         audit.append({'row_id':row['row_id'],'attack':attack,'memory':original,
           'segments (numbered)':'\n'.join(seg_by_index),'predicted_injected_idx':payload_indices,
           'predicted_payload_text':' '.join(payload),'rewritten_payload_text':' '.join(payload),

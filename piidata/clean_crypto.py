@@ -21,8 +21,9 @@ for title,body in TOPICS:
     TEMPLATES.extend([(title+' / overview',body),(title+' / note',body+' Keep a copy of the transaction reference for your records.'),
       (title+' / guide','For '+title.lower()+', '+body[0].lower()+body[1:]),(title+' / reminder',body+' Verify the network shown by the wallet.'),
       (title+' / reference','Documentation: '+body+' The wallet displays the details before confirmation.')])
-def generate(rng: random.Random,index: int):
+def generate(rng: random.Random,index: int,slots=None):
     title,body=TEMPLATES[index%len(TEMPLATES)]
     from .slots import fill_slots, make_slots
-    tail=' Reference {invoice_id} from {merchant} is dated {date}. Example amount: {amount} {token}; verify recipient {recipient}.'
-    return f'crypto-{index%len(TEMPLATES):03d}',fill_slots(body+tail,make_slots(rng))
+    values=slots or make_slots(rng)
+    tail=' The invoice is dated {date}, with requested total {amount} {token}. Review the payment terms and network fee before confirmation.'
+    return f'crypto-{index%len(TEMPLATES):03d}',fill_slots(body+tail,values)
