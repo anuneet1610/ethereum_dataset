@@ -941,60 +941,88 @@ Segments: 1243; mean characters: 116.7
 Whitespace token-length histogram: {"0-16": 915, "129+": 0, "17-32": 328, "33-64": 0, "65-128": 0}
 
 ## dev_ood_crai
-Segments: 1294; mean characters: 171.0
+Segments: 920; mean characters: 175.0
 
 | Label | Source | Count |
 |---:|---|---:|
-| 0 | crai | 616 |
-| 1 | crai | 678 |
+| 0 | crai | 475 |
+| 1 | crai | 445 |
 
 ### goal counts
-- null: 1294
+- null: 920
 
 ### style counts
-- null: 1294
+- null: 920
 
 ### carrier counts
-- null: 1294
+- null: 920
 
 ### position counts
-- null: 1294
+- null: 920
 
 ### Joint label/source/goal/style/carrier/position counts
 | Label | Source | Goal | Style | Carrier | Position | Count |
 |---:|---|---|---|---|---|---:|
-| 1 | crai | null | null | null | null | 678 |
-| null | crai | null | null | null | null | 616 |
+| 1 | crai | null | null | null | null | 445 |
+| null | crai | null | null | null | null | 475 |
 
-Whitespace token-length histogram: {"0-16": 448, "129+": 0, "17-32": 447, "33-64": 396, "65-128": 3}
+Whitespace token-length histogram: {"0-16": 308, "129+": 0, "17-32": 322, "33-64": 289, "65-128": 1}
 
 ## test_ood_crai
-Segments: 5118; mean characters: 174.2
+Segments: 2233; mean characters: 173.3
 
 | Label | Source | Count |
 |---:|---|---:|
-| 0 | crai | 2563 |
-| 1 | crai | 2555 |
+| 0 | crai | 1100 |
+| 1 | crai | 1133 |
 
 ### goal counts
-- null: 5118
+- null: 2233
 
 ### style counts
-- null: 5118
+- null: 2233
 
 ### carrier counts
-- null: 5118
+- null: 2233
 
 ### position counts
-- null: 5118
+- null: 2233
 
 ### Joint label/source/goal/style/carrier/position counts
 | Label | Source | Goal | Style | Carrier | Position | Count |
 |---:|---|---|---|---|---|---:|
-| 1 | crai | null | null | null | null | 2555 |
-| null | crai | null | null | null | null | 2563 |
+| 1 | crai | null | null | null | null | 1133 |
+| null | crai | null | null | null | null | 1100 |
 
-Whitespace token-length histogram: {"0-16": 1783, "129+": 0, "17-32": 1680, "33-64": 1649, "65-128": 6}
+Whitespace token-length histogram: {"0-16": 789, "129+": 0, "17-32": 728, "33-64": 714, "65-128": 2}
+
+## train_crai
+Segments: 3259; mean characters: 173.4
+
+| Label | Source | Count |
+|---:|---|---:|
+| 0 | crai | 1604 |
+| 1 | crai | 1655 |
+
+### goal counts
+- null: 3259
+
+### style counts
+- null: 3259
+
+### carrier counts
+- null: 3259
+
+### position counts
+- null: 3259
+
+### Joint label/source/goal/style/carrier/position counts
+| Label | Source | Goal | Style | Carrier | Position | Count |
+|---:|---|---|---|---|---|---:|
+| 1 | crai | null | null | null | null | 1655 |
+| null | crai | null | null | null | null | 1604 |
+
+Whitespace token-length histogram: {"0-16": 1134, "129+": 0, "17-32": 1077, "33-64": 1042, "65-128": 6}
 
 ## redteam_manual
 Segments: 0; mean characters: 0.0

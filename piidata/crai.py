@@ -23,6 +23,12 @@ def normalize_key(value):
 def is_memory_injection(value):
     return normalize_key(value)=='memoryinjection'
 
+_RELEVANT_PAYLOAD=re.compile(r'\b(?:wallet|seed phrase|mnemonic|private key|recovery phrase|credential|password|secret key|recipient|address|transfer|send funds|withdraw|deposit|payment|payee|sign(?:ing|ature)?|approval|approve|permit|allowance|balance|transaction history|transaction hash|wallet data|crypto(?:currency)? funds|token funds|redirect.{0,40}(?:payment|wallet|funds|address|recipient)|substitut\w*.{0,30}(?:payment|wallet|function))\b',re.I)
+
+def classify_memory_relevance(memory,is_attack):
+    if not is_attack: return 'crai_benign'
+    return 'crai_relevant' if _RELEVANT_PAYLOAD.search(str(memory)) else 'crai_other'
+
 
 def _rule_for(sentence):
     for name,pattern in _CUES:
@@ -115,6 +121,7 @@ def build_crai_split(rows):
         rewritten=sanitize(original)
         attack=row.get('attack')
         is_attack=is_memory_injection(attack)
+        relevance_tag=classify_memory_relevance(original,is_attack)
         if is_attack:
             pairs,first,rule=label_memory_with_audit(rewritten)
         else:
@@ -131,8 +138,9 @@ def build_crai_split(rows):
                 if seg: spans.append([seg.start,seg.end])
             seg_by_index.append(f'{i}: {"injected" if label else "clean"} | {text}')
             source_id=str(row.get('source_id') or row['row_id'])
-            split='dev_ood_crai' if int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%5==0 else 'test_ood_crai'
-            tag='crai_relevant' if is_attack else 'crai_other'
+            bucket=int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%100
+            split='train_crai' if bucket<50 else ('dev_ood_crai' if bucket<65 else 'test_ood_crai')
+            tag=relevance_tag
             output.append({'id':f"crai-{row['row_id']}-{i}",'doc_id':f"crai-{row['row_id']}",'split':split,
               'text':text,'context':ctx[i] if i<len(ctx) else text,'label':int(label),'source':'crai',
               'source_id':source_id,'crai_tag':tag,
@@ -140,10 +148,11 @@ def build_crai_split(rows):
               'hard_case':None,'paraphrased':False,'seg_index':i,'n_segments':len(pairs)})
         doc_id=f"crai-{row['row_id']}"
         source_id=str(row.get('source_id') or row['row_id'])
-        split='dev_ood_crai' if int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%5==0 else 'test_ood_crai'
+        bucket=int.from_bytes(hashlib.sha256(source_id.encode()).digest()[:4],'big')%100
+        split='train_crai' if bucket<50 else ('dev_ood_crai' if bucket<65 else 'test_ood_crai')
         documents.append({'doc_id':doc_id,'split':split,'text':rewritten,'injection_spans':spans,
           'original_text':original,'template_id':f"crai-{row['row_id']}",'source_split':row.get('source_split'),'source_id':source_id,
-          'crai_tag':'crai_relevant' if is_attack else 'crai_other'})
+          'crai_tag':relevance_tag})
         audit.append({'row_id':row['row_id'],'attack':attack,'memory':original,
           'segments (numbered)':'\n'.join(seg_by_index),'predicted_injected_idx':payload_indices,
           'predicted_payload_text':' '.join(payload),'rewritten_payload_text':' '.join(payload),

@@ -281,18 +281,20 @@ def build(config,paraphrase=False,skip_crai=False):
     crai_rows,crai_docs,audit=build_crai_split(crai_source)
     outputs['dev_ood_crai']=[r for r in crai_rows if r['split']=='dev_ood_crai']
     outputs['test_ood_crai']=[r for r in crai_rows if r['split']=='test_ood_crai']
+    outputs['train_crai']=[r for r in crai_rows if r['split']=='train_crai']
     docs['dev_ood_crai']=[d for d in crai_docs if d['split']=='dev_ood_crai']
     docs['test_ood_crai']=[d for d in crai_docs if d['split']=='test_ood_crai']
+    docs['train_crai']=[d for d in crai_docs if d['split']=='train_crai']
     assert_crai_nonempty(outputs['test_ood_crai'],enabled=not skip_crai)
     outputs['redteam_manual']=[]; docs['redteam_manual']=[]
 
     print(f"generation: {sum(map(len,outputs.values()))} rows ({time.perf_counter()-stage_started:.1f}s)",flush=True)
     # Remove exact and near duplicates; CrAI is carried through untouched.
-    crai_all=outputs['dev_ood_crai']+outputs['test_ood_crai']
+    crai_all=outputs['dev_ood_crai']+outputs['test_ood_crai']+outputs['train_crai']
     flat=[r for sp in (*SPLITS,'test_heldout') for r in outputs[sp]]
     # Balance the oversampled candidates before the quadratic near-duplicate
     # pass, keeping that pass bounded to the rows that can enter the corpus.
-    print(f"split: {len(flat)} in-distribution rows; CrAI {len(crai_all)} rows",flush=True)
+    print(f"split: {len(flat)} in-distribution rows; CrAI {len(crai_all)} rows ({time.perf_counter()-stage_started:.1f}s elapsed)",flush=True)
     flat=match_word_length_strata(flat,config.get('seed',1729))
     print(f"length matching candidates: {len(flat)} rows",flush=True)
     deduped=deduplicate_rows(flat)
@@ -336,6 +338,9 @@ def build(config,paraphrase=False,skip_crai=False):
     check_giveaways(all_rows,tokens); check_addresses(all_rows)
     for sp in outputs: check_hard_negative_docs(outputs[sp],docs[sp])
     assert_crai_nonempty(outputs['test_ood_crai'],enabled=not skip_crai)
+    crai_sets=[{r['source_id'] for r in outputs[s]} for s in ('train_crai','dev_ood_crai','test_ood_crai')]
+    if any(crai_sets[i]&crai_sets[j] for i in range(3) for j in range(i+1,3)):
+        raise AssertionError('CrAI source_id overlap across train/dev/test files')
     length_stats={sp:word_length_metrics(rows) for sp,rows in outputs.items() if rows and not sp.endswith('_crai')}
     source_stats=length_report_by_source(outputs['train'])
     length_lines=['# Word-length diagnostics','', 'Word counts are whitespace token counts. Length-only accuracy is measured with stratified 75/25 holdout within each group.','', '- Deduplication: normalized exact-hash only (datasketch MinHash LSH is unavailable; exact fallback used).','', '## Full train before length matching: source diagnosis','', '| Source | Rows | Clean mean | Clean median | Injected mean | Injected median | KS D | KS p | Length-only accuracy |','|---|---:|---:|---:|---:|---:|---:|---:|---:|']
@@ -352,7 +357,7 @@ def build(config,paraphrase=False,skip_crai=False):
     (ROOT/'reports'/'length_source_report.md').write_text('\n'.join(length_lines)+'\n',encoding='utf-8')
     for sp,rows in outputs.items():
         if rows and not sp.endswith('_crai'): check_length_balance(rows)
-    print('QC: passed',flush=True)
+    print(f"QC: passed ({time.perf_counter()-stage_started:.1f}s elapsed)",flush=True)
     ks_p=length_stats['train']['ks_p']
     probe=tfidf_probe(outputs['train'],outputs['test_id'],enforce_length=False)
     write_probe_report(ROOT/'reports'/'probe_report.md',probe,ks_p)
