@@ -20,6 +20,17 @@ python -m piidata.build --config configs/default.yaml --paraphrase
 
 The `--paraphrase` option uses `qwen2.5:7b-instruct` by default and caches responses under `cache/paraphrases/`. Run the shared segmenter using `piidata.segmenter.split_segments(text)`. Load outputs as a Hugging Face `DatasetDict` using `piidata.loader.load_dataset_dict(data_dir='data', use_context=True)`; this requires `datasets`.
 
+## v2 data (retraining to cut false alarms)
+
+v2 adds the clean text v1 never had (real docs prose, wallet help text, user commands, page clutter, emails), new attack families, contrast pairs, and test sets that can't flatter the model. It builds on top of the v1 files without changing them:
+
+```console
+python -m piidata.v2.fetch_docs   # once, needs network
+python -m piidata.v2.build
+```
+
+Train with `finetune_pi_classifier_v2.ipynb`. Details, labelling guide and leakage rules: `data/v2/README.md`.
+
 ## Outputs
 
 - `data/<split>.jsonl`: one labeled segment per line.

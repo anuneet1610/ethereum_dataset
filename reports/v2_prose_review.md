@@ -1,0 +1,195 @@
+# v2 prose: review queue and manual-pass sample
+
+Sentences mentioning AI tools/prompting or matching injection phrasing were removed from the clean pool (listed first). Below that is a random sample of kept prose per split for a manual pass.
+
+## Removed (0)
+
+
+## Kept sample: train (5055 rows total)
+
+- squidfunk/mkdocs-material: [SuperFences]: setup/extensions/python-markdown-extensions.md#superfences [diagrams]: reference/diagrams.md [Mermaid.js]: https://mermaid-js.github.io/mermaid/
+- wevm/viem: Executes a write function on a contract.
+- squidfunk/mkdocs-material: Furthermore, colors can be customized with a few lines of CSS to fit your brand's identity by using CSS variables.
+- wevm/viem: In this case, you can extend your Wallet Client with Public Actions to avoid having to handle multiple Clients.
+- github/docs: Viewing people's roles in an organization
+- pydantic/pydantic: While you can use experimental_allow_partial while validating against types that include other collection validators, those types will be validated "all or nothing", and partial validation will not work on more nested types.
+- python-poetry/poetry: In order to install this hook, you either need to specify default_install_hook_types, or you have to install it via pre-commit install --install-hooks -t post-checkout -t post-merge.
+- wevm/viem: A Custom Transport that executes requests via an EIP-1193 request function.
+- fastapi/fastapi: All in a way that provided the best development experience for all the developers.
+- pydantic/pydantic: examples: The examples of the field.
+- astral-sh/uv: For example, a wheel with a +cu.12.8.torch.2.11 local version is built for CUDA 12.8 and PyTorch 2.11.
+- pydantic/pydantic: For example, this is a valid type alias:
+- fastapi/fastapi: You can also use .include_router() multiple times with the same router using different prefixes.
+- wevm/viem: Optional: Hoist the Account
+- pydantic/pydantic: Adding a default with Field
+- wevm/viem: The price (in wei) to pay per gas for a Legacy Transaction.
+- github/docs: Setting up SSH agent forwarding
+- github/docs: Users you've collaborated with
+- astral-sh/uv: [PAT]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens [repository secret]: https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
+- jestjs/jest: For some reason you might have to use legacy implementation of fake timers.
+- python-poetry/poetry: If you want to get basic information about the currently activated virtual environment, you can use the env info command:
+- wevm/viem: Chain ID to authorize.
+- jestjs/jest: Disables automatic mocking in the module loader.
+- pydantic/pydantic: Enterprise plans include direct access to Pydantic engineers, 24/7 priority support, setup assistance, and an SLA matched to your operating model.
+- python-poetry/poetry: If you need to use a different credential for your package source, then it is recommended to use a different name for your publishing repository.
+- github/docs: Adding an email address to your GitHub account
+- github/docs: We recommend using only one personal account to manage both personal and professional repositories.
+- jestjs/jest: Use .toThrowErrorMatchingSnapshot to test that a function throws an error matching the most recent snapshot when it is called.
+- rust-lang/book: Defining Shared Behavior with Traits
+- squidfunk/mkdocs-material: We'll be tackling this as part of the upcoming [component system], which we'll start working on in early 2026. Once our new Markdown toolchain is ready, we'll provide automated tools to translate between Python Markdown and CommonMark, so you don't need to manually migrate your content.
+- fastapi/fastapi: You now have the tools to implement a complete security system based on username and password for your API.
+- wevm/viem: Utilities: Renamed chain types
+- github/docs: Use this installation access token to interact with your repositories, either via the REST or GraphQL APIs, or via a Git client.
+- pydantic/pydantic: Partial validation is particularly helpful when processing the output of an LLM, where the model streams structured responses, and you may wish to begin validating the stream while you're still receiving data (e.g. to show partial data to users).
+- github/docs: Review recent commits made to your repositories.
+- encode/httpx: One example is the local_address configuration which is only available via this low-level API.
+- encode/httpx: Proxy HTTPS requests on port 1234 to "example.com"...
+- rust-lang/book: In general, in order to use an Option value, you want to have code that will handle each variant.
+- github/docs: Remove the previous email address from your account.
+- jestjs/jest: There are two ways to mock functions: Either by creating a mock function to use in test code, or writing a manual mock to override a module dependency.
+- wevm/viem: Check out the usage of deployContract in the live Deploying Contracts Example below.
+- fastapi/fastapi: I normally give the final review to each PR before merging them.
+- fastapi/fastapi: Avoid directly mutating router.routes after including a router.
+- fastapi/fastapi: You can use Pydantic models to declare query parameters in FastAPI. 😎
+- github/docs: Viewing commit details from your timeline
+- squidfunk/mkdocs-material: In order to get started with the social plugin, just add the following lines to mkdocs.yml, and observe how Material for MkDocs generates beautiful social cards for you:
+- jestjs/jest: Does everything that mockFn.mockClear() does, and also replaces the mock implementation with an empty function, returning undefined.
+- encode/httpx: def .copy_with([scheme], [authority], [path], [query], [fragment]) - URL
+- wevm/viem: The state as a data blob.
+- pydantic/pydantic: This error is raised when the JSON schema generator has already been used to generate a JSON schema.
+- jestjs/jest: The snapshot artifact should be committed alongside code changes, and reviewed as part of your code review process.
+- rust-lang/book: This example shows that the names of the variables in the pattern don’t have to match the field names of the struct.
+- astral-sh/uv: uv uses editable installation for workspace packages by default.
+- github/docs: For the events that can appear in an organization's audit log or the audit log for an enterprise, see the linked article and the linked article.."
+- squidfunk/mkdocs-material: Use this setting to change the number of posts rendered per page.
+- rust-lang/book: Listing 20-4 shows how to use split_at_mut.
+- squidfunk/mkdocs-material: Use this setting to leverage the table of contents to display post titles in views.
+- github/docs: The comments themselves will remain intact, but will be associated with the ghost user.
+- squidfunk/mkdocs-material: Now, we want everyone to benefit from all features we have developed for Material for MkDocs, which is why we're making all Insiders features available to everyone!
+- prettier/prettier: "glimmer" (Ember / Handlebars, via @glimmer/syntax) _First available in 1.10.0_
+
+## Kept sample: dev (1033 rows total)
+
+- wevm/wagmi: We can invoke invalidateQueries inside a useEffect with the block number as it's only dependency – this will refetch all rendered balance queries when the blockNumber changes.
+- microsoft/vscode-docs: Hover over README.md in Changes and select + (Stage Changes).
+- wevm/wagmi: Query Prefetching: The process of prefetching queries and seeding the cache.
+- microsoft/vscode-docs: Review the conflicting sections and identify what each side represents.
+- microsoft/vscode-docs: Use a short summary for the first line.
+- wevm/wagmi: Almost no tests or documentation; infrequent updates
+- vitejs/vite: Vite's architecture continues to evolve.
+- vitejs/vite: true is the standard ECMAScript runtime behavior.
+- wevm/wagmi: Number of blocks in the requested range.
+- microsoft/vscode-docs: Use AI alongside your code: get suggestions as you type or use the Chat view to collaborate with an AI agent while you code.
+- wevm/wagmi: Finally, we can wire up our Send Transaction component to our application's entrypoint.
+- vitejs/vite: Given that Vite is used by many frameworks, it is intentionally unopinionated about complex replacements like conditionals.
+- microsoft/vscode-docs: Undo the last commit
+- wevm/wagmi: At the core of Wagmi are connections between apps and Ethereum providers (e.g. EIP-1193), useAccount, useAccountEffect, and useSwitchAccount are renamed to useConnection, useConnectionEffect, and useSwitchConnection to more accurately represent to how Wagmi works.
+- microsoft/vscode-docs: Open the branch containing the commit.
+- wevm/wagmi: Hook for requesting user tracks the token in their wallet.
+- microsoft/vscode-docs: Download the .rpm package from the  download page.
+- vitejs/vite: Follow the steps in the Vite deployment guide to get started.
+- vitejs/vite: Rolldown was built to unify both into a single bundler: written in Rust for native speed, and compatible with the same plugin API the ecosystem already relied on.
+- microsoft/vscode-docs: Create an empty folder named git-practice outside any existing Git repository.
+- wevm/wagmi: Examples ✅ 🔶 ✅
+- microsoft/vscode-docs: Select git to focus on commands executed by Git.
+- microsoft/vscode-docs: This change indicator is also shown in the Explorer view and in the editor tab title for modified files.
+- microsoft/vscode-docs: This doesn't change existing commits.
+- vitejs/vite: Its runner is a ModuleRunner.
+- vitejs/vite: Incognito mode should also be faster than a regular profile without extensions.
+- vitejs/vite: Deploy your static site using xmit by following this guide.
+- vitejs/vite: Check out the SSR Guide to learn about this feature.
+- wevm/wagmi: Less than requested may be returned if not all blocks are available.
+- wevm/wagmi: Check out the TypeScript docs for how to set up ABIs for maximum type inference and safety.
+- microsoft/vscode-docs: Node.js and JavaScript Education Extension Pack
+- vitejs/vite: This does not work in shell scripts and other tools like docker compose.
+- microsoft/vscode-docs: Essentially, a "code tour" is a series of interactive steps, each of which are associated with a specific directory, or file/line, and include a description of the respective code.
+- wevm/wagmi: Need to set up connectors and method for connecting wallet on your own
+- microsoft/vscode-docs: Configure the setting(git.confirmSync) setting to control whether  asks for confirmation before syncing.
+- vitejs/vite: For advanced use cases, the deployed assets and public files may be in different paths, for example to use different cache strategies.
+- microsoft/vscode-docs: shows the merge result in the Source Control view.
+- vitejs/vite: To improve the cache hit rate of chunks, Vite can create an import map for chunks.
+- wevm/wagmi: Sometimes the declarative nature of React Hooks doesn't work for parts of your app.
+- microsoft/vscode-docs: Inspect branch and commit history.
+- microsoft/vscode-docs: Install  on Windows, macOS, or Linux, then open the application and choose where to start.
+- wevm/wagmi: This is useful for scenarios where you want to fetch data before the user navigates to a page, or fetching data on the server to be reused on client hydration.
+- vitejs/vite: See Rollup's troubleshooting guide for more information too.
+- microsoft/vscode-docs: Switch to a different branch (you can't delete the currently active branch).
+- microsoft/vscode-docs: Undo or recover work Choose an undo action
+- microsoft/vscode-docs: Try an AI agent Build and validate a small app with an agent, then review the changes.
+- wevm/wagmi: The chain ID to check the bytecode at.
+- microsoft/vscode-docs: When you clone a private repository or push to a GitHub repository,  prompts you to sign in.
+- microsoft/vscode-docs: AI features are optional.
+- wevm/wagmi: In those cases, the connector will connect to whatever chain the connector's provider (e.g. wallet) is connected to.
+- vitejs/vite: This is provided because on some systems, the file change callback may fire too fast before the editor finishes updating the file, and direct fs.readFile will return empty content.
+- microsoft/vscode-docs: Run the operation again and complete any sign-in prompt.
+- vitejs/vite: Importing a Virtual File
+- wevm/wagmi: React Hooks Browse the collection of React Hooks and learn how to use them.
+- wevm/wagmi: Can pass a subset of UseWatchBlockNumberParametersdirectly to useWatchBlockNumber.
+- vitejs/vite: If using the Vue plugin, asset references in Vue SFC templates are automatically converted into imports.
+- microsoft/vscode-docs: Create and switch branches, set aside unfinished changes, and work on multiple branches in separate folders with the Git tools in .
+- microsoft/vscode-docs: Choose your next step
+- microsoft/vscode-docs: Step 3: Stage and commit
+- vitejs/vite: Install the Vercel CLI via npm i -g vercel and run vercel to deploy.
+
+## Kept sample: test (1534 rows total)
+
+- ethereum/ethereum-org-website: Traditional remittance services often come with high fees and slow processing times.
+- kubernetes/website: Privileged containers are not supported on Windows.
+- ethereum/ethereum-org-website: A hardware wallet provides offline storage for private keys.
+- ethereum/ethereum-org-website: How to revoke smart contract access to your crypto funds - If you suddenly see a transaction in your wallet that you did not initiate, this guide will teach you how to prevent that from happening again.
+- mdn/content: The vast ecosystem of installable tools for front-end web development currently exists mostly inside npm, a privately owned, package hosting service that works closely together with Node.js.
+- mdn/content: They write back-end code to request internal data, generate HTML pages from templates, and process external data submitted by users.
+- ethereum/ethereum-org-website: Click on "Receive" (or similarly worded option).
+- mdn/content: Copy the above code example to your clipboard (MDN code blocks have a copy icon in the top-right corner that you can press to do this).
+- ethereum/ethereum-org-website: What is a security key? - _Coinbase_
+- ethereum/ethereum-org-website: You can create a new contract and specify the number of NFTs, their properties and a link to some specific artwork.
+- kubernetes/website: Kubernetes lets you automatically apply seccomp profiles loaded onto a node to your Pods and containers.
+- ethereum/ethereum-org-website: Airdrop scams involve a scam project airdropping an asset (NFT, token) into your wallet and sending you to a scam website to claim the airdropped asset.
+- kubernetes/website: The API server presents a certificate.
+- kubernetes/website: Use a command-line flag if it exists: --user or --cluster.
+- ethereum/ethereum-org-website: More on the risks of browser extensions
+- mdn/content: Web developers shouldn't constantly pester their peers/colleagues, but equally, they shouldn't soldier on and pretend they know what they are doing when they don't.
+- kubernetes/website: You can use Linux policy-based mandatory access control (MAC) mechanisms, such as AppArmor and SELinux, to harden your Kubernetes workloads.
+- ethereum/ethereum-org-website: Remember: No one from ethereum.org will ever contact you.
+- kubernetes/website: It emits an event to both of the Pods. kubectl describe pod  the shows SELinuxLabel "" conflicts with pod  that uses the same volume as this pod with SELinuxLabel "".
+- ethereum/ethereum-org-website: Why ETH Supply and Issuance Matter
+- ethereum/ethereum-org-website: Wrapped ETH is a smart contract that lets you deposit any amount of ETH into the contract and receive the same amount in minted WETH that conforms to the ERC-20 token standard.
+- kubernetes/website: The pod will be allowed to start, but the invalid names will be recorded in the event log (InvalidVariableNames).
+- ethereum/ethereum-org-website: Using a password manager takes care of creating strong, unique passwords and remembering them!
+- ethereum/ethereum-org-website: Ethereum transactions, while not free, often come with lower fees.
+- ethereum/ethereum-org-website: The result of this?
+- ethereum/ethereum-org-website: But when you try to buy the scam token wARB, even a tiny purchase would change the price by over 90%:
+- mdn/content: The pipe operator can _connect_ these inputs and outputs together, allowing us to build up increasingly more complex operations to suit our needs — the output from one command can become the input to the next command.
+- ethereum/ethereum-org-website: How do payments work on Ethereum?
+- ethereum/ethereum-org-website: They might try to get you into giving their contracts an allowance on your ERC-20 tokens, exposing sensitive information that gives them access to your assets, etc.
+- mdn/content: Creating, copying, moving, removing
+- ethereum/ethereum-org-website: You don't care which specific dollar bill (or ETH) you have in your wallet, because they are all identical and worth the same.
+- kubernetes/website: If Bob makes the following request, the request is authorized because he is allowed to read objects in the projectCaribou namespace:
+- ethereum/ethereum-org-website: Every day, millions of people face the same challenge: moving money across borders is slow, expensive, and often frustrating.
+- mdn/content: So what is HTML?
+- mdn/content: On the other hand, AI tools have no reasoning skills and frequently provide answers that are misleading or just plain wrong.
+- mdn/content: Opening and editing files
+- ethereum/ethereum-org-website: Servers typically use an x402 facilitator to handle the blockchain complexity (sending the transaction, obtaining the payment, facilitating gas fees, etc.), which means that developers can easily accept crypto micropayments without managing payment infrastructure.
+- ethereum/ethereum-org-website: Some apps will request you to save a secret "recovery phrase" (sometimes called a "seed phrase" or a "mnemonic").
+- ethereum/ethereum-org-website: You can learn more about the different projects and important links on our layer 2 page.
+- kubernetes/website: Create a static pod
+- ethereum/ethereum-org-website: Moreover, since trusted bridges add trust assumptions, they carry additional risks such as:
+- mdn/content: When you type a web address in your browser, the browser looks at the DNS to find the website's IP address — the actual address the server is located at — before it can retrieve the website (see DNS explained below for more information).
+- ethereum/ethereum-org-website: Manual Checkpoints — operated by officials who manually check all the details of your ticket and identity before handing over the boarding pass.
+- ethereum/ethereum-org-website: Trustless: having equivalent security to the underlying domains.
+- mdn/content: If you want to test your code in all three major rendering engines and your computer is Windows-based, you will need to get access to a macOS- or iOS-based test device or use a software-based solution such as a virtual machine or test platform.
+- mdn/content: Every worthwhile code editor has a robust search and replace function.
+- ethereum/ethereum-org-website: WETH is a representation of ETH that allows you to interact with it as an ERC-20 token, not as the native asset ETH.
+- mdn/content: Jointly owning the project you are working on — both the successes and failures.
+- mdn/content: This is important — if a web technology relies on patented/licensed technologies to function, the patent/owner can then charge implementing browser vendors potentially large amounts of money, and those costs would then be passed on to the browser users.
+- ethereum/ethereum-org-website: You are able to unwrap WETH for ETH by using the WETH smart contract.
+- kubernetes/website: Windows user names are case insensitive.
+- ethereum/ethereum-org-website: Cryptocurrency is a relatively young and misunderstood technology.
+- kubernetes/website: Preferably, only the program and its dependencies, building the image from the minimal possible base.
+- mdn/content: A "Visit site" button should appear that you can click to view your site.
+- kubernetes/website: The list of masked and read-only paths are as follows:
+- mdn/content: Try using a couple of AI tools to do some searches.
+- ethereum/ethereum-org-website: Level up your knowledge
+- ethereum/ethereum-org-website: You just need to install a crypto wallet app.
+- kubernetes/website: For detailed instructions on in-place resize, see Resize CPU and Memory Resources assigned to Containers.
+- ethereum/ethereum-org-website: It is the difference between your expected exchange rate and the actual rate.

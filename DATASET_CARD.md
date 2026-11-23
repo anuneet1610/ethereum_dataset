@@ -14,6 +14,7 @@ Train and evaluate segment classifiers that screen extracted webpage or document
 - TriviaQA `rc` Wikipedia contexts: Apache 2.0 (per the dataset card).
 - Synthetic wallet/Ethereum prose, invoice-style hard negatives, and injection seeds: generated for this project; seed files were provided in the repository and are preserved unchanged.
 - CrAI-SafeFuncCall (`SentientAGI/crypto-agent-safe-function-calling`): only used in `test_ood_crai`; consult the Hugging Face dataset card for its license and terms before redistribution.
+- v2 documentation sentences (`data/v2/`): MIT, BSD-3-Clause, Apache-2.0, CC BY 4.0 (GitHub Docs, Kubernetes), CC BY 3.0 (VS Code docs) and CC BY-SA 2.5 (MDN, test split only). Each row carries `origin_url` and `licence`; the full list is in `data/v2/SOURCES.md`. v2 templates and attacks are generated for this project.
 
 ## Generation
 
